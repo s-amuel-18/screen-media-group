@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="212" height="200" viewBox="0 0 212 200">
+  <g id="Group_1" data-name="Group 1" transform="translate(-613 -281.774)">
+    <g id="iconfinder_4_4698570" transform="translate(596.2 184.374)">
+      <g id="Group_1276" data-name="Group 1276" transform="translate(16.8 97.4)">
+        <g id="Message_and_nofitications">
+          <path id="Path_2467" data-name="Path 2467" d="M100,0A100,100,0,1,1,0,100,100,100,0,0,1,100,0Z" fill="#eee"/>
+          <g id="Envelope" transform="translate(30.657 53.8)">
+            <path id="Shape_77_" d="M242.587,284.622V357.6a11.932,11.932,0,0,1-11.672,12.2H115.572A11.932,11.932,0,0,1,103.9,357.6V284.622a9.73,9.73,0,0,1,.732-3.778,18.74,18.74,0,0,1,2.243-3.443s66.909,2.27,132.782,0a9.839,9.839,0,0,1,2.243,3.443A11.716,11.716,0,0,1,242.587,284.622Z" transform="translate(-103.9 -277.4)" fill="#f2f2f2" stroke="#9b989b" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="6"/>
+            <g id="Outer" transform="translate(0.765 3.491)">
+              <path id="Path_2447" data-name="Path 2447" d="M242.656,284.7,222.71,298.761l-31.8,22.383a29.03,29.03,0,0,1-33.671,0l-31.8-22.383L105.5,284.7" transform="translate(-105.5 -284.7)" fill="none" stroke="#9b989b" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="6"/>
+              <g id="Lines_33_" transform="translate(45.951 60.165)">
+                <line id="Bottom_68_" x2="3.826" y2="2.965" transform="translate(0 3.683)" fill="none" stroke="#9b989b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2.5"/>
+                <line id="Middle_56_" x2="7.7" y2="5.883" fill="none" stroke="#9b989b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2.5"/>
+                <line id="Top_70_" x2="2.152" y2="1.626" transform="translate(5.548 0.526)" fill="none" stroke="#9b989b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2.5"/>
+              </g>
+              <g id="Vertical_line_5_" transform="translate(131.082 21.857)">
+                <line id="Bottom_67_" y2="10.761" transform="translate(0 8.848)" fill="none" stroke="#9b989b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"/>
+                <line id="Top_69_" y2="2.822" fill="none" stroke="#9b989b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"/>
+              </g>
+              <path id="Bottom_line_14_" d="M392.47,448.3a6.38,6.38,0,0,1-3.97,4.687" transform="translate(-259.378 -370.056)" fill="none" stroke="#9b989b" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3"/>
+              <g id="Content_14_" transform="translate(12.196 36.778)" opacity="0.7">
+                <path id="Bottom_66_" d="M152.252,416.717h-18.27a2.572,2.572,0,0,1-2.583-2.583v-8.752a2.572,2.572,0,0,1,2.583-2.583h18.27a2.572,2.572,0,0,1,2.583,2.583v8.752a2.572,2.572,0,0,1-2.583,2.583Z" transform="translate(-131.209 -383.096)" fill="#fff"/>
+                <path id="Top_68_" d="M151.852,375.517h-18.27A2.572,2.572,0,0,1,131,372.935v-8.752a2.572,2.572,0,0,1,2.583-2.583h18.27a2.572,2.572,0,0,1,2.583,2.583v8.752a2.634,2.634,0,0,1-2.584,2.582Z" transform="translate(-131 -361.6)" fill="#fff"/>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="iconfinder_alert-circle_2561314" transform="translate(761 394)">
+      <circle id="Ellipse_78" data-name="Ellipse 78" cx="30" cy="30" r="30" transform="translate(2 1)" fill="#f36360" stroke="#f2f2f2" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <line id="Line_105" data-name="Line 105" y2="16" transform="translate(32 15)" fill="none" stroke="#f2f2f2" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/>
+      <line id="Line_106" data-name="Line 106" transform="translate(32 46)" fill="none" stroke="#f2f2f2" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/>
+    </g>
+  </g>
+</svg>

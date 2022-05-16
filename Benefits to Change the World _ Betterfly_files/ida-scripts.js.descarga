@@ -1,0 +1,683 @@
+$(document).ready(function () {
+
+	//SLIDER REGULAR
+	var commonSlider = new Swiper(".swiper-simple", {
+		spaceBetween: 10,
+		grabCursor: false,
+		observer: true,
+		observeParents: true,
+		autoplay: false,
+		//corrección https://github.com/nolimits4web/swiper/issues/1925#issuecomment-347592879
+		loop: true,
+		// loopAdditionalSlides: true, //watch this
+		// loadPrevNext: true,
+		// lazy: true,
+		// watchSlidesVisibility: true,
+		pagination: {
+			el: '.swiper-simple .swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + '"></span>';
+			},
+		},
+		navigation: {
+			nextEl: ".swiper-simple .swiper-button-next",
+			prevEl: ".swiper-simple .swiper-button-prev"
+		},
+		on: {},
+		keyboard: {
+			enabled: true,
+			onlyInViewport: false
+		}
+	});
+
+	//SLIDER PARALLAX
+	var parallaxSlider = new Swiper(".swiper-parallax", {
+		speed: 800,
+		parallax: true,
+		observer: true,
+		observeParents: true,
+		//corrección https://github.com/nolimits4web/swiper/issues/1925#issuecomment-347592879
+		loop: false,
+		// loopAdditionalSlides: true, //watch this
+		// loadPrevNext: true,
+		lazy: true,
+		// watchSlidesVisibility: true,
+		pagination: {
+			el: '.swiper-parallax .swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + '"></span>';
+			},
+		},
+		navigation: {
+			nextEl: ".swiper-parallax .swiper-button-next",
+			prevEl: ".swiper-parallax .swiper-button-prev"
+		},
+		on: {},
+		keyboard: {
+			enabled: true,
+			onlyInViewport: false
+		}
+	});
+
+	//SLIDER CARRUSEL
+	//con loop
+	var swiperCarousel = new Swiper('.swiper-carousel', {
+		slidesPerView: 1,
+		initialSlide: 0,
+		spaceBetween: 20,
+		centeredSlides: true,
+		observer: true,
+		observeParents: true,
+		loop: true,
+
+		pagination: {
+			el: '.swiper-carousel .swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + '"></span>';
+			},
+		},
+
+		breakpoints: {
+			450: {
+				slidesPerView: 1.8,
+				spaceBetween: 10,
+				spaceBetween: 0,
+				slidesOffsetBefore: 0,
+				slidesOffsetAfter: 0
+			},
+			768: {
+				slidesPerView: 2,
+			},
+			800: {
+				slidesPerView: 3,
+			},
+			992: {
+				slidesPerView: 4,
+			},
+			1200: {
+				slidesPerView: 5,
+			},
+		}
+	});
+
+	//SLIDER CARRUSEL
+	//sin loop
+	var swiperCarouselNoLoop = new Swiper('.swiper-carousel-noloop', {
+		slidesPerView: 1,
+		initialSlide: 0,
+		// spaceBetween: 20,
+		centeredSlides: true,
+		observer: true,
+		observeParents: true,
+		loop: false,
+		pagination: {
+			el: '.swiper-carousel-noloop .swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + '"></span>';
+			},
+		},
+		breakpoints: {
+			450: {
+				slidesPerView: 1.4,
+				spaceBetween: 0,
+				slidesOffsetBefore: 0,
+				slidesOffsetAfter: 0
+			},
+			768: {
+				slidesPerView: 2,
+			},
+			800: {
+				slidesPerView: 3,
+			},
+			992: {
+				slidesPerView: 4,
+			},
+			1200: {
+				slidesPerView: 5,
+			},
+		}
+	});
+
+	//handler de navegación secundaria de elementos del menú
+	/*jQuery.each(jQuery('[data-role="touch-submenu-deployer"]'), function (e) {
+		$(this).on('click', function (e) {
+			var $deployer = $(this);
+			var $nav_item = $deployer.parents('[data-role="touch-navitem-deployer"]');
+			var $submenu = $($nav_item.find('.submenu'));
+
+			$deployer.toggleClass('deployed');
+			$nav_item.toggleClass('deployed');
+			$submenu.toggleClass('deployed');
+			e.preventDefault();
+		});
+	});*/
+	$.fn.deployMobileMenuItem = function (e) {
+		e.preventDefault();
+		var item = $(this);
+		item.parents('[data-role="touch-navitem-deployer"]').toggleClass('deployed');
+		item.parents('[data-role="touch-navitem-deployer"]').find('.fa-chevron-down, .submenu').toggleClass('deployed');
+	};
+	$(document).on('click', '[data-role="touch-submenu-deployer"]', function (e) {
+		$(this).deployMobileMenuItem(e);
+	});
+
+	//aplica atributos data de encontrar una lista con bullets
+	jQuery.each(jQuery('[data-role="divide-if-list"]'), function () {
+		var $this = $(this),
+			data_class = $this.data('list-class'),
+			max_items = $this.data('list-max') || 2;
+
+		$($this.find('ul')).attr('data-role', 'divider-grid');
+		$($this.find('ul')).attr('data-class', data_class);
+		$($this.find('ul')).attr('data-count-paragraph', max_items);
+	});
+
+	//divide una lista en dos columnas de poseer más de x elementos (count-paragraph)
+	jQuery.each(jQuery('[data-role="divider-grid"]'), function () {
+		var $this = $(this),
+			data_class = $this.data('class'),
+			countext = $this.children().length,
+			divider = $this.data('count-paragraph') || 2,
+			split = 2,
+			leftcol_qant = Math.round(countext / split),
+			contador = 1,
+			left_col = '',
+			col_html = '',
+			right_col = '';
+
+		if (countext > divider) {
+			jQuery.each(jQuery($this.children()), function () {
+				var lilkid = $(this).get(0).outerHTML;
+				if (contador <= leftcol_qant) {
+					left_col += lilkid;
+				} else {
+					right_col += lilkid;
+				}
+
+				contador++;
+			});
+
+			col_html = '<div class="' + data_class + '">' + left_col + '</div>' + '<div class="' + data_class + '">' + right_col + '</div>';
+			$this.html(col_html).addClass('row');
+		}
+	});
+
+	//cuenta items (data-maxchild) y separa en vista previa u oculta
+	jQuery.each($('[data-role="prev-collapse"]'), function () {
+		var $faqs = $(this);
+		var contador = 1;
+		var max_childs = $faqs.data('maxchild') || 5;
+		var wrap_prev = '';
+		var wrap_hide = '';
+
+		jQuery.each($faqs.children(), function () {
+			var $child = $(this);
+
+			$child.attr('data-num', contador);
+
+			if (contador > max_childs) {
+				wrap_hide += this.outerHTML;
+			} else {
+				wrap_prev += this.outerHTML;
+			}
+
+			contador++;
+		});
+
+		$faqs.html('<div class="faqs__prev">' + wrap_prev + '</div>' + '<div class="faqs__prev faqs__prev--hidden" data-role="hidden-collapse">' + wrap_hide + '</div>')
+
+		//re init al insertar después de la carga de js
+		if ($('.faq-widget').length) {
+			FaqWidget.init();
+		}
+	});
+
+	//hace un toggle del data-target y scrollea a su top
+	jQuery.each($('[data-role="more-collapse"]'), function () {
+		var $button = $(this);
+
+		$button.on('click', function () {
+			var data_class = $(this).data('class') || 'hide';
+			var $target = $($(this).data('target'));
+			var this_parent = $(this).data('parent') || $(this).parent();
+
+			$target.toggleClass(data_class);
+			$(this).toggleClass('active');
+
+			setTimeout(function () {
+				var target_offset = $target.offset().top - 120;
+
+				if (target_offset < 0) {
+					target_offset = $(this_parent).offset().top - 120;
+				}
+
+				$('html, body').animate({
+					scrollTop: target_offset
+				});
+			}, 200);
+		});
+	});
+
+
+	// SCRIPTS DE V2 DE FRONT IDA/BETTTERFLY
+
+	//SLIDER PARALLAX
+	var parallaxSliderSemi = new Swiper(".swiper-parallax-semi", {
+		speed: 800,
+		slidesPerView: 1,
+		initialSlide: 0,
+		centeredSlides: true,
+		parallax: false,
+		observer: true,
+		spaceBetween: 16,
+		observeParents: true,
+		loop: false,
+		pagination: {
+			el: '.swiper-parallax-semi .swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + '"></span>';
+			},
+		},
+		navigation: {
+			nextEl: ".swiper-parallax-semi .swiper-button-next",
+			prevEl: ".swiper-parallax-semi .swiper-button-prev"
+		},
+		on: {},
+		keyboard: {
+			enabled: true,
+			onlyInViewport: false
+		},
+		breakpoints: {
+			300: {
+				slidesPerView: 1.3,
+				spaceBetween: 16,
+			},
+			380: {
+				slidesPerView: 1.3,
+				spaceBetween: 16,
+			},
+			768: {
+				slidesPerView: 1,
+				spaceBetween: 16,
+			},
+
+			992: {
+				slidesPerView: 1,
+				spaceBetween: 0,
+			},
+		}
+	});
+
+	//SLIDER CARRUSEL
+	//para pills de centro de ayuda mobile
+	var swiperCarouselNoLoopPills = new Swiper('.swiper-carousel-pills', {
+		slidesPerView: 2,
+		initialSlide: 0,
+		spaceBetween: 16,
+		centeredSlides: true,
+		loop: false,
+		observer: true,
+		observeParents: true,
+		preventClicks: true,
+		preventClicksPropagation: true,
+		breakpoints: {
+			480: {
+				slidesPerView: 2.5,
+				initialSlide: 0,
+				slidesOffsetBefore: 0,
+				slidesOffsetAfter: 0
+			},
+			768: {
+				slidesPerView: 3.5,
+				initialSlide: 0,
+			},
+		}
+	});
+
+	//SLIDER CARRUSEL
+	//con loop
+	//3 columnas de videos
+	var swiperCarouselVideos3 = new Swiper('.swiper-carousel-videos--3-cols', {
+		slidesPerView: 1,
+		initialSlide: 0,
+		spaceBetween: 16,
+		centeredSlides: true,
+		observer: true,
+		observeParents: true,
+		//corrección https://github.com/nolimits4web/swiper/issues/1925#issuecomment-347592879
+		loop: true,
+		loopAdditionalSlides: true, //watch this
+		loadPrevNext: true,
+		lazy: true,
+		watchSlidesVisibility: true,
+
+		pagination: {
+			el: '.swiper-carousel-videos--3-cols .swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + '"></span>';
+			},
+		},
+		navigation: {
+			nextEl: ".swiper-carousel-videos--3-cols .swiper-button-next",
+			prevEl: ".swiper-carousel-videos--3-cols .swiper-button-prev"
+		},
+		breakpoints: {
+			300: {
+				slidesPerView: 1.2,
+				spaceBetween: 16,
+				initialSlide: 0,
+				loop: false,
+			},
+			380: {
+				slidesPerView: 1.3,
+				spaceBetween: 16,
+				initialSlide: 0,
+				loop: false,
+			},
+			768: {
+				slidesPerView: 2,
+				spaceBetween: 16,
+				initialSlide: 1,
+				loop: false,
+			},
+
+			992: {
+				slidesPerView: 3,
+				spaceBetween: 32,
+				initialSlide: 1,
+				loop: true,
+			},
+		}
+	});
+
+	//SLIDER CARRUSEL
+	//con loop
+	//2 columnas de videos
+	var swiperCarouselVideos2 = new Swiper('.swiper-carousel-videos--2-cols', {
+		slidesPerView: 1,
+		initialSlide: 0,
+		spaceBetween: 16,
+		centeredSlides: false,
+		observer: true,
+		observeParents: true,
+		//corrección https://github.com/nolimits4web/swiper/issues/1925#issuecomment-347592879
+		loop: false, // watch this
+		loopAdditionalSlides: false, // watch this
+		loadPrevNext: true,
+		lazy: true,
+		watchSlidesVisibility: true,
+		pagination: {
+			el: '.swiper-carousel-videos--2-cols .swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + '"></span>';
+			},
+		},
+		navigation: {
+			nextEl: ".swiper-carousel-videos--2-cols .swiper-button-next",
+			prevEl: ".swiper-carousel-videos--2-cols .swiper-button-prev"
+		},
+		breakpoints: {
+			300: {
+				slidesPerView: 1.2,
+				centeredSlides: true,
+			},
+			380: {
+				slidesPerView: 1.3,
+				centeredSlides: true,
+			},
+			768: {
+				slidesPerView: 2,
+				spaceBetween: 16,
+				centeredSlides: true,
+			},
+			992: {
+				slidesPerView: 2,
+				spaceBetween: 32,
+				centeredSlides: false,
+			},
+		}
+	});
+
+	//SLIDER CARRUSEL
+	//con loop
+	//3 columnas de videos
+	var swiperCarouselPlanes = new Swiper('.swiper-carousel-planes', {
+		slidesPerView: 1,
+		initialSlide: 1,
+		spaceBetween: 16,
+		centeredSlides: true,
+		observer: true,
+		observeParents: true,
+		loop: false,
+		allowSlideNext: false,
+		allowSlidePrev: false,
+		pagination: {
+			el: '.swiper-carousel-planes .swiper-pagination',
+			clickable: true,
+			renderBullet: function (index, className) {
+				return '<span class="' + className + '"></span>';
+			},
+		},
+		breakpoints: {
+			300: {
+				slidesPerView: 1.2,
+				spaceBetween: 16,
+				initialSlide: 1,
+				allowSlideNext: true,
+				allowSlidePrev: true,
+			},
+			380: {
+				slidesPerView: 1.4,
+				spaceBetween: 16,
+				initialSlide: 1,
+				allowSlideNext: true,
+				allowSlidePrev: true,
+			},
+			768: {
+				slidesPerView: 2,
+				spaceBetween: 16,
+				initialSlide: 1,
+				allowSlideNext: true,
+				allowSlidePrev: true,
+			},
+
+			992: {
+				slidesPerView: 3,
+				spaceBetween: 32,
+				initialSlide: 1,
+			},
+		}
+	});
+
+	//handler de tabs de centro de ayuda controlado por botones en pestañas y botones en carousel mobile
+	jQuery.each(jQuery('[data-tab-group] [data-toggle="tab"]'), function (e) {
+		$(this).on('click', function (e) {
+			var $tab = $(this);
+			var hash_target = $tab.attr('href');
+			var parent_group = $($tab.parents('section')).data('tab-group');
+
+			$('[data-tab-group="' + parent_group + '"] [data-toggle="tab"]:not([href="' + hash_target + '"])').removeClass('active');
+			$('[data-tab-group="' + parent_group + '"] [data-toggle="tab"][href="' + hash_target + '"]').addClass('active');
+
+			$('[data-tab-group="' + parent_group + '"] [role="tabpanel"]').removeClass('show active');
+			$('[data-tab-group="' + parent_group + '"] ' + hash_target).addClass('show active');
+
+			console.log($tab.attr('data-slide'));
+			swiperCarouselNoLoopPills.slideTo($tab.attr('data-slide'));
+
+			resize_slider($('[data-tab-group="' + parent_group + '"] ' + hash_target + ' .swiper-carousel-videos'));
+			e.preventDefault();
+		});
+	});
+
+	//función de resize de encusta para mantener el ancho mínimo generado por el contenido inicial
+	function resize_encuesta($encuesta) {
+		$encuesta.css('min-width', $encuesta.width() + 'px');
+		$encuesta.css('min-height', $encuesta.height() + 'px');
+	};
+
+	//handler de envío de encuesta rápida en colapsabe de centro de ayudas
+	jQuery.each(jQuery('[data-role="encuesta"]'), function (e) {
+		var $encuesta = $(this);
+		var $respuestas = $encuesta.find('[data-encuesta-respuesta]');
+		var $resultados = $encuesta.find('[data-encuesta-resultado]');
+
+		resize_encuesta($encuesta);
+		$(window).on('resize', function () {
+			resize_encuesta($encuesta);
+		})
+
+		$respuestas.on('click', function (e) {
+			var $current_respuesta = $(this);
+			var respuesta_value = $current_respuesta.data('encuesta-respuesta') || 'default';
+
+			$resultados.removeClass('active');
+			$encuesta.find('[data-encuesta-resultado="' + respuesta_value + '"]').addClass('active');
+			e.preventDefault();
+		});
+	});
+
+	//pequeño reset de textarea que en focus comenzaba con espacios tabulados
+	jQuery.each(jQuery('textarea.form-box__field'), function (e) {
+		$(this).on('focus', function () {
+			if (!$(this).hasClass('active')) {
+				$(this).val('');
+				$(this).addClass('active');
+			}
+		});
+	});
+
+	//contador de caracteres máximos permitidos para textarea
+	jQuery.each(jQuery('[data-role="limit-text-area"]'), function (e) {
+		var $texto = $(this);
+		var $texarea = $($texto.data('for'));
+		var maxlength = $texarea.attr('maxlength');
+
+		$texarea.keyup(function (e) {
+			var $current = $(this),
+				valuelength = $current.val().length,
+				countdown = $current.parent().find('[data-counter]');
+
+			countdown.text(maxlength - valuelength);
+
+			e.preventDefault();
+		});
+	});
+
+	//funcion para autoresize automático de textearea a medida que se inicia el tipeo
+	jQuery.each(jQuery('[data-behaviour="autoresize"]'), function () {
+		var offset = this.offsetHeight - this.clientHeight;
+		var resizeTextarea = function (el) {
+			jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
+		};
+		jQuery(this).on('keyup input', function () {
+			resizeTextarea(this);
+		}).removeAttr('data-autoresize');
+	});
+
+	// funcion para hacer resize a máscara de sliders en centro de ayuda
+	function resize_slider($slider) {
+		var slider_minheight = $slider.height();
+		$slider.find('.swiper-arrow-block').attr('style', 'min-height: calc(' + slider_minheight + ' * 1.5px)');
+	};
+
+	//para cada slider de videos, reset la máscara
+	jQuery.each(jQuery('.swiper-carousel-videos'), function (e) {
+		resize_slider($(this));
+		$(window).on('resize', function () {
+			resize_slider($(this));
+		});
+	});
+
+	function resize_this($this) {
+		$this.css('max-height', $this.height() + 'px');
+	}
+
+	//elementos colapsables dentro del card de planes
+	jQuery.each(jQuery('[data-role="toggle-parent"]'), function (e) {
+		var $btn = $(this);
+		var $collapse = $btn.parent();
+		var $body = $btn.next();
+
+		$btn.on('click', function () {
+			$btn.toggleClass('deployed');
+			$body.toggleClass('deployed');
+		});
+	});
+
+
+
+	//Añadidos for equipo @betterfly
+	var swiperBenefit = new Swiper('.swiper-container.benefit', {
+		speed: 800,
+		parallax: true,
+		navigation: {
+			nextEl: '.benefit .swiper-button-next',
+			prevEl: '.benefit .swiper-button-prev',
+		},
+	});
+	var swiperTesti = new Swiper('.swiper-container.testi-inner', {
+		speed: 800,
+		parallax: true,
+		navigation: {
+			nextEl: '.testi-inner .swiper-button-next',
+			prevEl: '.testi-inner .swiper-button-prev',
+		},
+	});
+});
+
+//trigger scroll para cargar bien el shadow header si se recarga a mitad de página
+$(window).ready(function () {
+	var everythingLoaded_scroll = setInterval(function () {
+		if (/loaded|complete/.test(document.readyState)) {
+			clearInterval(everythingLoaded_scroll);
+			$(window).trigger('scroll');
+		}
+	}, 250);
+
+	var flagOpen = false; //identifica si existe un elemento abierto
+	var lastNum = 0; //identifica el último elemento abierto
+	//Cuándo se hace click sobre alguna lista de preguntas
+	$('.faq-list__question').click(function () {
+		//Si no existe alguna lista de preguntas desplegada
+		if (!flagOpen) {
+			$(this).children("div.faq-list__question-content").css("max-height", "500px");
+			$(this).addClass('faq-list__question-opened');
+			flagOpen = true;
+		}
+		//Si existe alguna lista deplegada
+		else {
+			//si la lista deplegada coincide con la que se quiere deplegar
+			if (lastNum === $(this).attr("data-num")) {
+				$(this).children("div.faq-list__question-content").css("max-height", "0px");
+				$(this).removeClass('faq-list__question-opened');
+				flagOpen = false;
+			}
+			//Si la lista que se quiere desplegar no es la misma que está actualmente desplegada
+			else {
+				getByDatanum(lastNum);
+				$(this).children("div.faq-list__question-content").css("max-height", "500px");
+				$(this).addClass('faq-list__question-opened');
+				flagOpen = true;
+			}
+		}
+		lastNum = $(this).attr("data-num"); //la lista actualmente desplegada se guarda en la variable global
+	});
+	//Obtiene y abre elemento según el valor del atriburo "data-num"
+	function getByDatanum(dataNum) {
+		let anterior = $('div[data-num=' + dataNum + ']');
+		anterior.children("div.faq-list__question-content").css("max-height", "0px");
+		anterior.removeClass('faq-list__question-opened');
+	}
+	// Al hacer click en cualquier tab, vuelve a cero el valor del último elemento abierto o desplegado
+	$('.nav-link').click(function () {
+		lastNum = 0;
+	});
+});

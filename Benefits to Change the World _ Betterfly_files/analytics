@@ -1,0 +1,30 @@
+
+function piResponse() {
+		piSetCookie('visitor_id882773', '166523731', 3650);
+			piSetCookie('visitor_id882773-hash', '89f804e8916860ae00d9b5a6c765f84eb28341270508c3303df751fffa8824d092bc5b97d5af8fc761cb0c2769bbb4243ea15737', 3650);
+		
+		if (document.location.protocol != "https:" || (document.location.protocol == "https:" && true)) {
+		var analytics_link = document.location.protocol + "//" + "prdt.betterfly.cl/analytics?";
+		pi.tracker.visitor_id='166523731';
+
+				pi.tracker.visitor_id_sign='89f804e8916860ae00d9b5a6c765f84eb28341270508c3303df751fffa8824d092bc5b97d5af8fc761cb0c2769bbb4243ea15737';
+		
+				pi.tracker.campaign_id='55459';
+		
+		var variables = 'conly=true';
+		for (property in pi.tracker) {
+					variables += "&" + property + "=" + pi.tracker[property];
+				}
+		var headID = document.getElementsByTagName("head")[0];
+		piScriptObj[piScriptNum] = document.createElement('script');
+		piScriptObj[piScriptNum].type = 'text/javascript';
+		piScriptObj[piScriptNum].src = analytics_link + variables;
+		headID.appendChild(piScriptObj[piScriptNum]);
+		piScriptObj[piScriptNum].onload = function() { return; }
+	}
+	}
+piResponse();
+
+
+
+
