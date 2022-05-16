@@ -1,11 +1,5 @@
-body {
-  background: #2d2d2d;
-}
-
 .Iam {
-  padding: 2em 5em;
-  font: normal 40px/50px Montserrat, sans-serif;
-  color: #999;
+  /* padding: 2em 5em; */
 }
 .Iam p {
   height: 50px;
@@ -17,11 +11,11 @@ body {
   overflow: hidden;
   position: relative;
   height: 50px;
-  top: 40px;
+  /* top: 40px; */
 }
 .Iam .innerIam {
   display: inline-block;
-  color: #e74c3c;
+  /* color: #e74c3c; */
   position: relative;
   white-space: nowrap;
   top: 0;
