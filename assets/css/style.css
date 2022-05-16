@@ -88,19 +88,19 @@ body {
 
 .slider-y .single-column {
     -webkit-animation: var(--animation, none) 20s infinite linear;
-    animation: var(--animation, none) 20s infinite linear;
+    animation: var(--animation, none) 28s infinite linear;
     padding: 0;
     margin: 0 10px;
-    width: calc(25% - 20px);
+    width: calc(33.3% - 20px);
 }
 
 .slider-y .single-column li {
-    border-radius: 30px;
+    border-radius: 15px;
     margin-bottom: 15px;
     list-style: none;
     overflow: hidden;
-    width: 100px;
-    height: 100px;
+    /* width: 31%$; */
+    /* height: 100px; */
 }
 
 .slider-y .single-column li img {
