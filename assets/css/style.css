@@ -225,3 +225,26 @@ body {
     opacity: 1 !important;
     display: block;
 }
+
+
+.geeks{
+    animation: blur 8s linear infinite;
+  }
+  
+  @keyframes blur {
+    0% {
+      filter: blur(10px);
+    }
+    20% {
+      filter: blur(0);
+    }
+    60%{
+      filter: blur(0);
+    }
+    95% {
+      filter: blur(30px);
+    }
+    100% {
+      filter: blur(10px);
+    }
+  }
