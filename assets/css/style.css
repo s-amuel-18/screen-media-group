@@ -1,5 +1,10 @@
+* {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Montserrat', sans-serif !important;
+    /* behavior: 'smooth'; */
 }
 
 .header {
@@ -226,25 +231,24 @@ body {
     display: block;
 }
 
-
-.geeks{
+.geeks {
     animation: blur 8s linear infinite;
-  }
-  
-  @keyframes blur {
+}
+
+@keyframes blur {
     0% {
-      filter: blur(10px);
+        filter: blur(10px);
     }
     20% {
-      filter: blur(0);
+        filter: blur(0);
     }
-    60%{
-      filter: blur(0);
+    60% {
+        filter: blur(0);
     }
     95% {
-      filter: blur(30px);
+        filter: blur(30px);
     }
     100% {
-      filter: blur(10px);
+        filter: blur(10px);
     }
-  }
+}
