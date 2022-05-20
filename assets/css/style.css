@@ -260,3 +260,21 @@ body {
 .br-5 {
     border-radius: 10px;
 }
+
+.img-btn-chat {
+    top: 0;left: 0;right: 0;
+    transition: .5s all;
+}
+
+.img-btn-chat.active {
+    opacity: 0;
+
+}
+
+.btn-contact-chat:hover > .img-btn-chat {
+    opacity: 0;
+}
+
+.btn-contact-chat:hover > .img-btn-chat.active {
+    opacity: 1;
+}
